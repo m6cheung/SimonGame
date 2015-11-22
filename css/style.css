@@ -1,0 +1,82 @@
+html {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+body {
+  background: url('http://www.mcmillencenter.org/Publications/Body%20Talk%20Series%20Brochure/files/wood-ipad-background.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+#topTitle {
+  text-align: center;
+  color: black;
+  font-weight: bold;
+  margin-bottom: 40px;
+}
+
+#cont {
+  height: 410px;
+  width: 420px;
+  text-align: center;
+  margin: auto auto 30px auto;
+}
+
+.options {
+  text-align: center;
+  margin: auto;
+}
+
+.message, .level, .win {
+  color: black;
+  font-weight: bold;
+  text-align: center;
+}
+
+#red, #blue, #green, #yellow {
+  border: 6px solid black;
+  width: 205px;
+  height: 200px;
+  margin: auto;
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+  box-shadow: 1px 1px 1px 2px;
+}
+
+#green {
+  border-top-left-radius: 200px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  background-color: #00AA00;
+}
+
+#red {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 200px;
+  border-bottom-right-radius: 10px;  
+  background-color: #CC0000;
+}
+
+#yellow {
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 200px; 
+  background-color: #DDDD30;
+}
+
+#blue {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 200px;
+  border-top-right-radius: 10px; 
+  background-color: #000088;
+}
+
+/*light up colors
+green - #ff0000
+red - #CC0000
+blue - #0000FF
+yellow - #FFFF30
+*/
+
