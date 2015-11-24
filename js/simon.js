@@ -41,6 +41,7 @@ $(document).ready(function() {
       sound: ySound,
       color: $yellow
     }];
+  var seqTimeouts = [];
   var cpuSeq = [];
   var cpuData = [];
   var playerData = [];
@@ -74,13 +75,13 @@ $(document).ready(function() {
     cpu = [];
     time = 1000;
     $.each(cpuSeq, function(index, colorObj) {
-      int1 = setTimeout(function() {
+      seqTimeouts.push(setTimeout(function() {
         colorObj.color.trigger('mousedown');
         colorObj.sound.play();
-      }, time);
-      int2 = setTimeout(function() {
+      }, time));
+      seqTimeouts.push(int2 = setTimeout(function() {
         colorObj.color.trigger('mouseup');
-      }, time + 200);
+      }, time + 200));
       time += 1000;
       cpu.push(colorObj.color.val());
       if(cpu[cpuData.length] != undefined) {
@@ -94,15 +95,14 @@ $(document).ready(function() {
   
   function initialMove() {
     var randomPick = Math.floor(Math.random() * random.length);
-    int3 = setTimeout(function() {
+    seqTimeouts.push(setTimeout(function() {
       random[randomPick].color.trigger('mousedown');
       random[randomPick].sound.play();
-    }, time);
-    int4 =setTimeout(function() {
+    }, time));
+    seqTimeouts.push(setTimeout(function() {
       random[randomPick].color.trigger('mouseup');
       playerTurn = true;
-      console.log(playerTurn);
-    }, time + 500);
+    }, time + 500));
     cpu.push(random[randomPick].color.val());
     if(cpu[cpuData.length] != undefined) {
       cpuData.push(cpu[cpuData.length]);
@@ -113,29 +113,28 @@ $(document).ready(function() {
   function cpuMove() {
     playerTurn = false;
     time = 1000;
-      player = [];
-      cpu = [];
-        $.each(cpuSeq, function(index, colorObj) {
-          int5 = setTimeout(function() {
-            colorObj.color.trigger('mousedown');
-            colorObj.sound.play();
-          }, time);
-          int6 = setTimeout(function() {
-            colorObj.color.trigger('mouseup');
-          }, time + 200);
-          time += 1000;
-          cpu.push(colorObj.color.val());
-          if(cpu[cpuData.length] != undefined) {
-            cpuData.push(cpu[cpuData.length]);
-          }
-        });
-      int7 = setTimeout(initialMove(), time);
+    player = [];
+    cpu = [];
+    $.each(cpuSeq, function(index, colorObj) {
+      seqTimeouts.push(setTimeout(function() {
+        colorObj.color.trigger('mousedown');
+        colorObj.sound.play();
+      }, time));
+      seqTimeouts.push(setTimeout(function() {
+        colorObj.color.trigger('mouseup');
+      }, time + 200));
+      time += 1000;
+      cpu.push(colorObj.color.val());
+      if(cpu[cpuData.length] != undefined) {
+        cpuData.push(cpu[cpuData.length]);
+      }
+    });
+    setTimeout(initialMove(), time);
     $level.html('Current Level: ' + cpuData.length);
     console.log(cpu);
   }
   
   $start.click(function() {
-    playerTurn = false;
     gameOn = true;
     $start.hide();
     $reset.show();
@@ -146,17 +145,13 @@ $(document).ready(function() {
   });
   
   $reset.click(function() {
-    setTimeout(function() {
-      playerTurn = false;
-    }, 1600);
-    clearTimeout(int1);
-    clearTimeout(int2);
-    clearTimeout(int3);
-    clearTimeout(int4);
-    clearTimeout(int5);
-    clearTimeout(int6);
-    clearTimeout(int7);
+    time = 1000;
+    $.each(seqTimeouts, function(ind, timeouts) {
+      clearTimeout(timeouts);
+    });
+    playerTurn = false;
     gameOn = false;
+    seqTimeouts = [];
     $reset.hide();
     $start.show();
     cpuSeq  = [];
@@ -177,7 +172,10 @@ $(document).ready(function() {
       strict = true;
       $message.html("STRICT MODE - ONE life");
     } else {
-      $message.html("Canot switch difficulty while game game is in session!");
+      $win.html("Canot switch difficulty while game game is in session!");
+      setTimeout(function() {
+        $win.html('');
+      }, 1000);
     }
   });
   
@@ -187,7 +185,10 @@ $(document).ready(function() {
       strict = false;
       $message.html("EASY MODE - UNLIMITED lives");
     } else {
-      $message.html("Canot switch difficulty while game game is in session!");
+      $win.html("Canot switch difficulty while game game is in session!");
+      setTimeout(function() {
+        $win.html('');
+      }, 1000);
     }
   });
   
