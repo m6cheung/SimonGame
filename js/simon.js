@@ -140,7 +140,7 @@ $(document).ready(function() {
     $reset.show();
     if(cpu.length === 0) {
       initialMove();
-      $level.html('Current Level: ' + cpuData.length)
+      $level.html('Current Level: ' + cpuData.length);
     }
   });
   
