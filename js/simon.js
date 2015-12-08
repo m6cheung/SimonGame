@@ -158,7 +158,7 @@ $(document).ready(function() {
     player = [];
     cpu = [];
     cpuData = [];
-    $level.html('Current Level: ' + cpuData.length)
+    $level.html('Current Level: ' + cpuData.length);
   });
   
   function strictEasy() {
